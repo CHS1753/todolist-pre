@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+   function preBoard() { 
+      let boards = localStorage.getItem('boards');
+      if(boards===null) {
+        boards = [];
+        localStorage.setItem('boards',JSON.stringify(boards));
+      } else {
+        boards = JSON.parse(boards)
+        return boards;
+      }
+    }
+  </script>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+      </tr>
+    </thead>
+    <tbody id="boards"></tbody>
+  </table>
+  <a href="write.html">글 작성</a>
+  <script>
+    const boards = preBoard();
+    initBoard(boards);
+    function initBoard(boards) {
+      const $boards =document.getElementById('boards');
+      let html = "";
+      for (const board of boards) {
+        html += `
+          <tr>
+          <td>${board.bno}</td>
+          <td>${board.title}</td>
+          <td>${board.nickname}</td>
+          </tr>`
+        }
+        $boards.innerHTML=html;
+    }
+  </script>
+</body>
+</html>

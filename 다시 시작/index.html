@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <table>
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+      </tr>
+    </thead>
+    <tbody id="boards"></tbody>
+  </table>
+  <a href="write.html">글 작성</a>
+  <script>
+
+    // 프로그램 실행은 당연히 여기
+    // index에서는 board 초기화
+    // write는 bno 초기화
+    // function aaa() {}형식으로 합수 만들면 함수앞에서도 호출가능, 함수를 연결해주는 방법 왜? -> 호이스팅
+      const boards = initBoard();
+      renderBoards();
+
+    function initBoard() {
+      let boards = localStorage.getItem('boards');
+      if(boards===null){
+       boards = [];
+      localStorage.setItem('boards',JSON.stringify(boards));
+      } else {
+        boards = JSON.parse(boards);
+        return boards;
+      }
+      //여기에 추가하지 않은 이유는 따로만든 이유가 없기 때문 함수를 되도록이면 짧게 만들기 -> 고치기 쉽기 때문
+    }
+
+    function renderBoards() {
+       const $boards = document.getElementById('boards')
+    let html = ''
+    console.log(boards);
+    for( const board of boards) {
+      html+= `
+          <tr>
+            <td>${board.bno}</td>
+            <td><a href='read.html?bno=${board.bno}'>${board.title}</a></td>
+            <td>${board.nickname}</td>
+            </tr>`
+    }
+    $boards.innerHTML = html
+    }
+  </script>
+</body>
+</html>

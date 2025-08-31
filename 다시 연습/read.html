@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>글번호: <span id="bno"></span></div>
+  <div>제목: <span id="title"></span></div>
+  <div>작성자: <span id="nickname"></span></div>
+  <div id="content"></div>
+  <a href="index.html" class="btn btn-outline-primary">돌아가기</a>
+  <button onclick="goUpDate()">수정하기</button>
+  <button onclick="goDelete()">삭제하기</button>
+  <script>
+    const search =location.search;
+    const indexOfEqual = search.indexOf("=");
+    const Bno = search.substring(indexOfEqual+1);
+  </script>
+</body>
+</html>
